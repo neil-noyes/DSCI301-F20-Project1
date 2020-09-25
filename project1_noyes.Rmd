@@ -1,0 +1,22 @@
+---
+title: "Project 1"
+author: "Neil Noyes"
+date: "9/25/2020"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Loading and cleaning the data :: A reflection
+  The Windows Store data was loaded in using read_csv() with configured columns to reflect the datatypes of each variable. The Price column stood out here, with an automated data type selection of a char (because of the "Free" entry in a lot of prices) and was then configured to be a double. With this change, we developed NA values for the prices of free applications, which then were changed to 0.0. As well as changing the Price variable configuration, I also parsed the Date variable and added columns for year and month for some future analysis dealing with distributions over certain days/years.
+
+
+## Clean the data with our script
+```{r}
+source("CleanData.R", local = knitr::knit_global())
+```
+

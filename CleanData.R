@@ -3,6 +3,7 @@
 
 library(tidyverse)
 library(here)
+library(dplyr)
 
 
 #Store path 
@@ -43,3 +44,9 @@ store_data <- store_data %>%
     Month = as.numeric(format(Date, "%m"))
   ) %>%
   na.omit()
+
+#the price is also in Rupees, which isn't very useful for us, so we shall convert to USD
+store_data <- store_data %>%
+  mutate(
+    Price = Price / 73.76
+  )

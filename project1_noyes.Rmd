@@ -20,3 +20,100 @@ knitr::opts_chunk$set(echo = TRUE)
 source("CleanData.R", local = knitr::knit_global())
 ```
 
+## What does our data show us from the beginning? 
+
+This dataset is based on the applications being offered on the Windows Store. The dataset includes the following variables:
+
+  - Name                (name of the app)
+  - Rating              (rating for the app)
+  - No of people Rated  (count of the total ratings)
+  - Category            (category of application)
+  - Date                (date which the app was posted)
+  - Price               (price of the app)
+  
+There are 5,318 unique variables containing data from 2010-2020, although there aren't many applications listed for the   earlier years. 
+  
+
+
+## Individual Variables
+
+**Rating:** 
+The distribution of ratings for apps on the Windows store:
+```{r}
+store_data %>%
+  ggplot() +
+  geom_bar(aes(x = Rating), width = 0.5, fill = "#FF6666") +
+  ggtitle("Distribution of Application Ratings") +
+  xlab("Rating (1-5)") +
+  ylab("# Ratings")
+```
+
+While we are at it, lets look at the top 5 apps on the store (relative to how many people rated the application)
+```{r}
+topFive <- store_data %>%
+  arrange(desc(Rating),desc(`No of people Rated`))%>%
+  head(n=5)
+  topFive
+```
+
+
+**Price:**
+The distribution of application price on the Windows Store:
+
+This table shows that the vast majority of applications are free
+```{r}
+store_data %>%
+  count(Price <= 0)
+```
+
+
+## Relationships among variables
+
+Let's took a look at the **number of applications put onto the Window's Store over time**.
+
+First, we can collect a count for the number of apps on the store each year..
+```{r}
+appsPerYear <- 
+  store_data %>%
+    group_by(Year) %>%
+    summarise(appCount = n())
+    appsPerYear
+```
+
+Then we can throw them into ggplot
+```{r}
+appsPerYear %>%
+  ggplot() +
+  geom_line(aes(as.factor(Year), appCount, group = 1)) +
+  ggtitle("Number of Applications published onto the Windows Store per Year") +
+  ylab("# of Applications") + 
+  xlab("Year")
+  
+```
+
+Windows 10 was broadly released for the general public on July 29, 2015 with an updated version of the Windows Store which merged Microsoft's other distribution platforms (Windows Marketplace, Windows Phone Store, Xbox Video and Xbox Music) into a unified store front for Windows 10 on all platforms, offering apps, games, music, film, TV series, themes, and ebooks.This in particular would align with the peek of applications put onto the store the next year (2016). 
+
+**What categories are rated the highest?**
+
+Let's get a table going
+```{r}
+ratingsPerCategory <- 
+  store_data %>%
+    group_by(Category) %>%
+    summarise(avgRating = mean(Rating, na.rm = TRUE))
+    ratingsPerCategory
+```
+
+Then 
+```{r}
+ggplot(ratingsPerCategory, aes(x = Category, y = avgRating, fill = Category)) +
+  geom_bar(stat = "identity") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none") +
+  ggtitle("Average Rating per Category") + 
+  xlab("Category") + 
+  ylab("Average Rating")
+```
+
+
+
+## Conclusion

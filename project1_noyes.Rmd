@@ -91,7 +91,9 @@ appsPerYear %>%
   
 ```
 
-Windows 10 was broadly released for the general public on July 29, 2015 with an updated version of the Windows Store which merged Microsoft's other distribution platforms (Windows Marketplace, Windows Phone Store, Xbox Video and Xbox Music) into a unified store front for Windows 10 on all platforms, offering apps, games, music, film, TV series, themes, and ebooks.This in particular would align with the peek of applications put onto the store the next year (2016). 
+Windows 10 was broadly released for the general public on July 29, 2015 with an *updated version of the Windows Store which merged Microsoft's other distribution platforms (Windows Marketplace, Windows Phone Store, Xbox Video and Xbox Music) into a unified store front for Windows 10 on all platforms*, offering apps, games, music, film, TV series, themes, and ebooks.This in particular would align with the peek of applications put onto the store the next year (2016) with respect to a couple of hypotheses: 
+  1. Along with the merge, there could've been applications previously published elsewhere, but are now counted as      released the year of the merge, causing an influx of counts.
+  2. Since the merge occured, which happened because of Windows 10 release, there could have been potential for a       lot of more applications to be published because of the popularity of Windows 10 combined with the ease of         applications built for different niche areas (i.e. phone store, Xbox video/music, etc.). 
 
 **What categories are rated the highest?**
 
@@ -115,5 +117,9 @@ ggplot(ratingsPerCategory, aes(x = Category, y = avgRating, fill = Category)) +
 ```
 
 
-
 ## Conclusion
+
+  The exploratory data analysis of the Windows Store dataset showed us a few basic, yet interesting details hidden below the surface. Through exploration of single variables, we have shown that there is a high overall rating for applications among the store, accompanied by an overwhelming majority of them being free. We also looked into the relationship between variables by showing the amount of applications released each year over time, which ended up highlighting a major even within the Window's store's lifecycle (see Relationships among variables section). We also have an examination of the distribution of average ratings per category of which an application belongs to, which has shown that all of the categories of applications on the Windows store are on average all about the same.
+  
+  
+  As far as future related works, if it would be possible to gather some further data on the merge of the windows store, I think we could find a good answer to the peek of applications published in 2016, which would be very interesting to dive into. Although there is more possible with the dataset, it is relatively small, so future avenues would primarily involve further and deeper comparison similar to that of what I have already covered. For example, we could look at the busiest time of the year for release dates of applications or even something like average name length. One thing that I think would really tie together this dataset is the amount of downloads that the applciation has, which is very surprising that it isn't included and could make for some very intersting observations. 

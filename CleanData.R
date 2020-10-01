@@ -8,7 +8,7 @@ library(dplyr)
 
 #Store path 
 store_data_path <- here("Datasets", "msft.csv")
-
+#store_data_path <- here("DSCI_301_REPOS","DSCI301-F20-Project1", "Datasets", "msft.csv")
 
 #Read in data
 store_data <- read_csv(store_data_path)

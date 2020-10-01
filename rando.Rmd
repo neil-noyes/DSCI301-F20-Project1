@@ -1,0 +1,30 @@
+---
+title: "random"
+author: "Neil Noyes"
+date: "9/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+data <- mpg
+```
+
+```{r}
+View(mpg)
+```
+
+```{r}
+mpg %>%
+  filter(class == "pickup") %>%
+  ggplot() +
+  geom_histogram(aes(x = hwy), binwidth = 1.8)
+```
+

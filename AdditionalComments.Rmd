@@ -1,0 +1,38 @@
+---
+title: "Additional"
+author: "John W. Hoggard"
+date: "10/6/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, message=F, warning = F}
+source("CleanData.R")
+```
+
+
+```{r}
+store_data %>%
+  ggplot() +
+  geom_bar(aes(x = Rating), fill = "#FF6666") +
+  ggtitle("Distribution of Application Ratings") +
+  xlab("Rating (1-5)") +
+  ylab("# Ratings")
+```
+
+On your rating per category, a flip might work instead of adjusting the orientation of the labels. I've also added a `guides` layer (we haven't talked about) to get rid of the legend, and switched `geom_bar` to `geom_col` (which is meant for taking the data directly from the table):
+```{r}
+ratingsPerCategory <- 
+  store_data %>%
+    group_by(Category) %>%
+    summarise(avgRating = mean(Rating, na.rm = TRUE))
+ggplot(ratingsPerCategory, aes(y = Category, x = avgRating, fill = Category)) +
+  geom_col() +
+  ggtitle("Average Rating per Category") + 
+  ylab("Category") + 
+  xlab("Average Rating") + guides(fill=FALSE)
+```
+
